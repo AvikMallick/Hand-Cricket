@@ -36,7 +36,9 @@ const userBatIcon = document.querySelector('.icon--user--bat');
 const userBallIcon = document.querySelector('.icon--user--ball');
 const robotBatIcon = document.querySelector('.icon--robot--bat');
 const robotBallIcon = document.querySelector('.icon--robot--ball');
-console.log(userBatIcon, userBallIcon, robotBatIcon, robotBallIcon);
+const batBtn = document.querySelector('#btn--bat');
+const fieldBtn = document.querySelector('#btn--field');
+// console.log(userBatIcon, userBallIcon, robotBatIcon, robotBallIcon);
 
 // HEAD -> 0 TAIL -> 1
 // JS Variables
@@ -158,19 +160,7 @@ const doToss = function () {
     document.querySelector('.toss--lost').classList.add('hidden');
     document.getElementById('press-esc--toss').classList.add('hidden');
 
-    // now choose bat or field
-    const batBtn = document.querySelector('#btn--bat');
-    const fieldBtn = document.querySelector('#btn--field');
-    batBtn.addEventListener('click', function () {
-      userBatting = true;
-      enterNumberBtn.textContent = 'hit';
-      closeModal2();
-    });
-    fieldBtn.addEventListener('click', function () {
-      userBatting = false;
-      enterNumberBtn.textContent = 'bowl';
-      closeModal2();
-    });
+    // yoo
   } else {
     // computer gets modal2 to decide
     // 0 -> bat, 1 -> field
@@ -457,6 +447,48 @@ overlayEl.addEventListener('click', closeModal3);
 // do toss and open modal2 to show result
 modalHeadBtn.addEventListener('click', doToss);
 modalTailBtn.addEventListener('click', doToss);
+
+// now choose bat or field
+batBtn.addEventListener('click', function () {
+  userBatting = true;
+  enterNumberBtn.textContent = 'hit';
+  closeModal2();
+  if (userBatting) {
+    document.querySelector('.team--0').classList.add('team--active');
+    document.querySelector('.team--1').classList.remove('team--active');
+    userBatIcon.classList.remove('hidden');
+    robotBallIcon.classList.remove('hidden');
+    userBallIcon.classList.add('hidden');
+    robotBatIcon.classList.add('hidden');
+  } else {
+    document.querySelector('.team--0').classList.remove('team--active');
+    document.querySelector('.team--1').classList.add('team--active');
+    userBallIcon.classList.remove('hidden');
+    robotBatIcon.classList.remove('hidden');
+    userBatIcon.classList.add('hidden');
+    robotBallIcon.classList.add('hidden');
+  }
+});
+fieldBtn.addEventListener('click', function () {
+  userBatting = false;
+  enterNumberBtn.textContent = 'bowl';
+  closeModal2();
+  if (userBatting) {
+    document.querySelector('.team--0').classList.add('team--active');
+    document.querySelector('.team--1').classList.remove('team--active');
+    userBatIcon.classList.remove('hidden');
+    robotBallIcon.classList.remove('hidden');
+    userBallIcon.classList.add('hidden');
+    robotBatIcon.classList.add('hidden');
+  } else {
+    document.querySelector('.team--0').classList.remove('team--active');
+    document.querySelector('.team--1').classList.add('team--active');
+    userBallIcon.classList.remove('hidden');
+    robotBatIcon.classList.remove('hidden');
+    userBatIcon.classList.add('hidden');
+    robotBallIcon.classList.add('hidden');
+  }
+});
 
 //Dont start match if toss is not done
 // start first innings
